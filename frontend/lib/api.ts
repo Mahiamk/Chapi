@@ -11,6 +11,7 @@ function normalizeBaseUrl(url?: string) {
 }
 
 const API_BASE_URL = normalizeBaseUrl(process.env.NEXT_PUBLIC_API_URL)
+  console.log('API Base URL:', process.env.NEXT_PUBLIC_API_URL);
 
 const api = axios.create({
   baseURL: API_BASE_URL,

@@ -1,6 +1,16 @@
 import axios from 'axios'
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+function normalizeBaseUrl(url?: string) {
+  if (!url) return ''
+  let u = url.trim()
+  // strip trailing slashes
+  u = u.replace(/\/+$/, '')
+  // strip a trailing "/api" segment if present (we append "/api/..." in calls)
+  u = u.replace(/\/api$/, '')
+  return u
+}
+
+const API_BASE_URL = normalizeBaseUrl(process.env.NEXT_PUBLIC_API_URL)
 
 const api = axios.create({
   baseURL: API_BASE_URL,

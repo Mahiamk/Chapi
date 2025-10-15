@@ -37,11 +37,12 @@ export const getWaitlistSignups = async (token: string) => {
 }
 
 export async function deleteSignup(id: number, token: string) {
-  const res = await axios.delete(`${API_BASE_URL}/api/waitlist/delete/${id}`, {
+  const res = await api.delete(`/api/waitlist/delete/${id}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return res.data;
 }
+
 
 export default api
 

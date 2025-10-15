@@ -1,0 +1,50 @@
+services:
+  # PostgreSQL Database
+  - type: pserv
+    name: waitlist-db
+    env: docker
+    dockerfilePath: ./Dockerfile.db
+    plan: starter
+    envVars:
+      - key: POSTGRES_DB
+        value: waitlist
+      - key: POSTGRES_USER
+        value: waitlist_user
+      - key: POSTGRES_PASSWORD
+        generateValue: true
+
+  # FastAPI Backend
+  - type: web
+    name: waitlist-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromService:
+          type: pserv
+          name: waitlist-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_PASSWORD
+        value: admin123
+      - key: RESEND_API_KEY
+        sync: false
+      - key: FRONTEND_URL
+        value: https://waitlist-frontend.onrender.com
+
+  # Next.js Frontend
+  - type: web
+    name: waitlist-frontend
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    plan: starter
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: waitlist-backend
+          envVarKey: RENDER_EXTERNAL_URL
+

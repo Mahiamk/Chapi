@@ -1,7 +1,7 @@
 # resend_test.py
 import httpx
 
-API_KEY ="re_FWf3Kb2v_MmjKhTxB1FCKcccujkUrfLcY"
+API_KEY ="your_real_resend_api_key_here"
 
 url = "https://api.resend.com/emails"
 headers = {

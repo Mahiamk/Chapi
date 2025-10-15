@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
-import { ArrowRight, CheckCircle, Users, Clock, Gift, Instagram, Sun, Moon } from 'lucide-react'
+import { ArrowRight, CheckCircle, Users, Clock, Gift, Instagram, Sun, Moon, Shield } from 'lucide-react'
 import { FaTelegram, FaTiktok } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 import { signupWaitlist } from '@/lib/api'
@@ -30,6 +31,7 @@ export default function HomePage() {
   const spinnerBorder = theme === 'dark' ? 'border-black' : 'border-white'
   const circleBg = theme === 'dark' ? 'bg-white/20' : 'bg-black/20'
   const transparentButton = theme === 'dark' ? 'bg-transparent border border-white/20 text-white hover:border-white hover:bg-white/5' : 'bg-transparent border border-black/20 text-black hover:border-black hover:bg-black/5'
+  const adminButtonBg = theme === 'dark' ? `${glassBg} ${hoverBg}` : `${glassBg} ${hoverBg}`
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark')
@@ -63,10 +65,23 @@ export default function HomePage() {
     </button>
   )
 
+  const renderAdminButton = () => (
+    <Link href="/admin">
+      <button
+        className={`${adminButtonBg} backdrop-blur-sm flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 fixed top-4 left-4 z-50`}
+        aria-label="Admin Panel"
+      >
+        <Shield className={`w-5 h-5 ${textColor}`} />
+        <span className={`text-sm font-medium ${textColor}`}>Admin Control</span>
+      </button>
+    </Link>
+  )
+
   if (isSubmitted) {
     return (
       <>
         {renderToggle()}
+        {renderAdminButton()}
         <div className={`${bgColor} min-h-screen flex items-center justify-center p-4 font-sans relative`}>
           <div className="max-w-md w-full text-center">
             <div className={`w-20 h-20 ${circleBg} rounded-full flex items-center justify-center mx-auto mb-6`}>
@@ -93,6 +108,7 @@ export default function HomePage() {
   return (
     <>
       {renderToggle()}
+      {renderAdminButton()}
       <div className={`${bgColor} min-h-screen font-sans relative`}>
         {/* Hero Section */}
         <div className="container mx-auto px-4 py-16 flex flex-col items-center">

@@ -12,23 +12,23 @@ const api = axios.create({
 
 // Waitlist API
 export const signupWaitlist = async (email: string) => {
-  const response = await api.post('/api/api/waitlist/signup', { email })
+  const response = await api.post('/api/waitlist/signup', { email })
   return response.data
 }
 
 export const getWaitlistCount = async () => {
-  const response = await api.get('/api/api/waitlist/count')
+  const response = await api.get('/api/waitlist/count')
   return response.data
 }
 
 // Admin API
 export const adminLogin = async (password: string) => {
-  const response = await api.post('/api/api/auth/login', { password })
+  const response = await api.post('/api/auth/login', { password })
   return response.data
 }
 
 export const getWaitlistSignups = async (token: string) => {
-  const response = await api.get('/api/api/waitlist/list', {
+  const response = await api.get('/api/waitlist/list', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -37,7 +37,7 @@ export const getWaitlistSignups = async (token: string) => {
 }
 
 export async function deleteSignup(id: number, token: string) {
-  const res = await api.delete(`/api/api/waitlist/delete/${id}`, {
+  const res = await api.delete(`/api/waitlist/delete/${id}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return res.data;

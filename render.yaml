@@ -1,13 +1,12 @@
 services:
-  # PostgreSQL Database (Corrected)
-  - type: pserv
+  # PostgreSQL Database
+  - type: postgres
     name: waitlist-db
-    env: postgres
+    databaseName: waitlist
+    user: waitlist_user
     plan: starter
-    databaseName: waitlist    # 👈 Use this key for the database name
-    user: waitlist_user       # 👈 Use this key for the username
     postgres:
-      version: "17"           # 👈 Correct version from your settings
+      version: "17"
 
   # FastAPI Backend
   - type: web
@@ -15,13 +14,12 @@ services:
     env: docker
     plan: starter
     healthCheckPath: /health
-    # 👇 ADD THIS LINE 👇
     rootDir: ./backend
     dockerfilePath: ./backend/Dockerfile
     envVars:
       - key: DATABASE_URL
         fromService:
-          type: pserv
+          type: postgres
           name: waitlist-db
           property: connectionString
       - key: SECRET_KEY
@@ -30,15 +28,12 @@ services:
         value: admin123
       - key: RESEND_API_KEY
         sync: false
-      - key: FRONTEND_URL
-        value: https://waitlist-frontend.onrender.com
 
   # Next.js Frontend
   - type: web
     name: waitlist-frontend
     env: docker
     plan: starter
-    # 👇 ADD THIS LINE 👇
     rootDir: ./frontend
     dockerfilePath: ./frontend/Dockerfile
     envVars:
@@ -46,4 +41,9 @@ services:
         fromService:
           type: web
           name: waitlist-backend
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: FRONTEND_URL # For backend CORS
+        fromService:
+          type: web
+          name: waitlist-frontend
           envVarKey: RENDER_EXTERNAL_URL

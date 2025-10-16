@@ -4,8 +4,8 @@ databases:
     databaseName: waitlist
     user: waitlist_user
     plan: starter
-    postgresVersion: 17
-    
+    version: 17
+
 services:
   # FastAPI Backend
   - type: web

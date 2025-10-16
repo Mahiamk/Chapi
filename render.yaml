@@ -4,13 +4,10 @@ services:
     name: waitlist-db
     env: postgres
     plan: starter
-    databaseName: waitlist    # 👈 Move and rename POSTGRES_DB
-    user: waitlist_user       # 👈 Move and rename POSTGRES_USER
+    databaseName: waitlist    # 👈 Use this key for the database name
+    user: waitlist_user       # 👈 Use this key for the username
     postgres:
-      version: "15"
-    envVars:
-      - key: POSTGRES_PASSWORD  # 👈 Only the password (or other custom vars) stays here
-        generateValue: true
+      version: "17"           # 👈 Correct version from your settings
 
   # FastAPI Backend
   - type: web

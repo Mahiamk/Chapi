@@ -10,7 +10,6 @@ function normalizeBaseUrl(url?: string) {
   return u
 }
 
-const NEXT_PUBLIC_API_URL= "https://chapi-1.onrender.com"
 const API_BASE_URL = normalizeBaseUrl(process.env.NEXT_PUBLIC_API_URL)
 if (typeof console !== 'undefined') {
   // helpful in browser to verify configuration
@@ -20,7 +19,7 @@ if (typeof console !== 'undefined') {
     console.error('Missing NEXT_PUBLIC_API_URL in production build; API calls will go to the frontend origin and 404.')
   }
 }
-  console.log('API Base URL:', process.env.NEXT_PUBLIC_API_URL);
+
 
 const api = axios.create({
   baseURL: API_BASE_URL,

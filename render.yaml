@@ -1,13 +1,12 @@
-services:
+databases:
   # PostgreSQL Database
-  - type: postgres
-    name: waitlist-db
+  - name: waitlist-db
     databaseName: waitlist
     user: waitlist_user
     plan: starter
     postgres:
       version: "17"
-
+services:
   # FastAPI Backend
   - type: web
     name: waitlist-backend

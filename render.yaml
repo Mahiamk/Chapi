@@ -4,7 +4,6 @@ databases:
     databaseName: waitlist
     user: waitlist_user
     plan: starter
-    version: 17
 
 services:
   # FastAPI Backend

@@ -83,118 +83,6 @@ export default function HomePage() {
     </Link>
   )
 
-  const renderMobileForm = () => (
-    // <div className="block sm:hidden max-w-md mx-auto space-y-4 mb-6">
-    //   <input
-    //     {...register('email', {
-    //       required: 'Email is required',
-    //       pattern: {
-    //         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-    //         message: 'Invalid email address'
-    //       }
-    //     })}
-    //     type="email"
-    //     placeholder="Enter your email address"
-    //     className={`px-4 py-3 bg-transparent border ${borderColor} rounded-lg ${textColor} ${placeholderColor} focus:ring-2 ${focusRingColor} transition-all w-full`}
-    //     disabled={isLoading}
-    //   />
-    //   {errors.email && (
-    //     <p className="text-red-400 text-sm text-left">{errors.email.message}</p>
-    //   )}
-    //   <button
-    //     type="submit"
-    //     disabled={isLoading}
-    //     className={`${buttonBg} px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap w-full text-sm`}
-    //   >
-    //     {isLoading ? (
-    //       <>
-    //         <div className={`w-4 h-4 border-2 ${spinnerBorder} border-t-transparent rounded-full animate-spin mr-2`}></div>
-    //         Joining
-    //       </>
-    //     ) : (
-    //       <>
-    //         Join Waitlist
-    //         <ArrowRight className="w-4 h-4 ml-2" />
-    //       </>
-    //     )}
-    //   </button>
-    // </div>
-    <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto mb-6 w-full">
-  <input
-    {...register('email', {
-      required: 'Email is required',
-      pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: 'Invalid email address'
-      }
-    })}
-    type="email"
-    placeholder="Enter your email address"
-    className={`flex-1 px-4 py-3 bg-transparent border ${borderColor} rounded-lg ${textColor} ${placeholderColor} focus:ring-2 ${focusRingColor} transition-all`}
-    disabled={isLoading}
-  />
-  <button
-    type="submit"
-    disabled={isLoading}
-    className={`${buttonBg} px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap w-full sm:w-auto text-base`}
-  >
-    {isLoading ? (
-      <>
-        <div className={`w-4 h-4 border-2 ${spinnerBorder} border-t-transparent rounded-full animate-spin mr-2`}></div>
-        Joining...
-      </>
-    ) : (
-      <>
-        Join Waitlist
-        <ArrowRight className="w-5 h-5 ml-2" />
-      </>
-    )}
-  </button>
-</div>
-
-  )
-
-  const renderDesktopForm = () => (
-    <div className="hidden sm:flex gap-4 max-w-md mx-auto mb-6">
-      <input
-        {...register('email', {
-          required: 'Email is required',
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email address'
-          }
-        })}
-        type="email"
-        placeholder="Enter your email address"
-        className={`flex-1 px-4 py-3 bg-transparent border ${borderColor} rounded-lg ${textColor} ${placeholderColor} focus:ring-2 ${focusRingColor} transition-all`}
-        disabled={isLoading}
-      />
-      <button
-        type="submit"
-        disabled={isLoading}
-        className={`${buttonBg} px-8 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap min-w-[140px] text-base`}
-      >
-        {isLoading ? (
-          <>
-            <div className={`w-5 h-5 border-2 ${spinnerBorder} border-t-transparent rounded-full animate-spin mr-2`}></div>
-            Joining...
-          </>
-        ) : (
-          <>
-            Join Waitlist
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </>
-        )}
-      </button>
-    </div>
-  )
-
-  const renderErrors = () => (
-    errors.email && (
-      <p className="text-red-400 text-sm text-center sm:text-left max-w-md mx-auto">{errors.email.message}</p>
-    )
-  )
-
   if (isSubmitted) {
     return (
       <>
@@ -231,29 +119,56 @@ export default function HomePage() {
         {/* Hero Section */}
         <div className="container mx-auto px-4 py-12 sm:py-16 flex flex-col items-center">
           <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
-            {/* Floating animation for main heading */}
             <h1 className={`text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-bold mb-6 sm:mb-8 leading-tight ${textColor}`}>
               <span className={textColor}>Something Amazing</span>
               <br />
               <span className={textColor}>is Coming Soon</span>
             </h1>
             <p className={`text-base sm:text-lg ${secondaryText} max-w-2xl mx-auto leading-relaxed px-4 sm:px-0`}>
-              Be the first to experience our revolutionary product. Join our exclusive waitlist 
+              Be the first to experience our revolutionary product. Join our exclusive waitlist
               and get early access, special discounts, and insider updates.
             </p>
 
-            {/* Mobile form (stacked vertically under heading) */}
-            {renderMobileForm()}
-
-            {/* Desktop form (horizontal under heading) */}
-            {renderDesktopForm()}
-
-            {/* Errors (common) */}
-            {renderErrors()}
-
+            {/* --- UNIFIED RESPONSIVE FORM --- */}
+            <div className="max-w-md w-full mx-auto space-y-4 sm:space-y-0 sm:flex sm:gap-4 mb-6">
+              <input
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Invalid email address'
+                  }
+                })}
+                type="email"
+                placeholder="Enter your email address"
+                className={`w-full sm:flex-1 px-4 py-3 bg-transparent border ${borderColor} rounded-lg ${textColor} ${placeholderColor} focus:ring-2 ${focusRingColor} transition-all`}
+                disabled={isLoading}
+              />
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={`${buttonBg} w-full sm:w-auto px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap`}
+              >
+                {isLoading ? (
+                  <>
+                    <div className={`w-5 h-5 border-2 ${spinnerBorder} border-t-transparent rounded-full animate-spin mr-2`}></div>
+                    Joining...
+                  </>
+                ) : (
+                  <>
+                    Join Waitlist
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </>
+                )}
+              </button>
+            </div>
             
+            {/* Common Error Display */}
+            {errors.email && (
+              <p className="text-red-400 text-sm text-center -mt-4 mb-4 max-w-md mx-auto">{errors.email.message}</p>
+            )}
 
-            {/* Features Grid - below, compact */}
+            {/* Features Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 pt-8">
               <div className={`${glassBg} backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-lg border ${borderColor} ${hoverBg} ${hoverBorder} hover:scale-105 transition-all duration-300`}>
                 <Users className={`w-10 h-10 sm:w-12 sm:h-12 ${textColor} mx-auto mb-3 sm:mb-4`} />

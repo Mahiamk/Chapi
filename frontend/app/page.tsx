@@ -84,41 +84,74 @@ export default function HomePage() {
   )
 
   const renderMobileForm = () => (
-    <div className="block sm:hidden max-w-md mx-auto space-y-4 mb-6">
-      <input
-        {...register('email', {
-          required: 'Email is required',
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email address'
-          }
-        })}
-        type="email"
-        placeholder="Enter your email address"
-        className={`px-4 py-3 bg-transparent border ${borderColor} rounded-lg ${textColor} ${placeholderColor} focus:ring-2 ${focusRingColor} transition-all w-full`}
-        disabled={isLoading}
-      />
-      {errors.email && (
-        <p className="text-red-400 text-sm text-left">{errors.email.message}</p>
-      )}
-      <button
-        type="submit"
-        disabled={isLoading}
-        className={`${buttonBg} px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap w-full text-sm`}
-      >
-        {isLoading ? (
-          <>
-            <div className={`w-4 h-4 border-2 ${spinnerBorder} border-t-transparent rounded-full animate-spin mr-2`}></div>
-            Joining
-          </>
-        ) : (
-          <>
-            Join Waitlist
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </>
-        )}
-      </button>
-    </div>
+    // <div className="block sm:hidden max-w-md mx-auto space-y-4 mb-6">
+    //   <input
+    //     {...register('email', {
+    //       required: 'Email is required',
+    //       pattern: {
+    //         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+    //         message: 'Invalid email address'
+    //       }
+    //     })}
+    //     type="email"
+    //     placeholder="Enter your email address"
+    //     className={`px-4 py-3 bg-transparent border ${borderColor} rounded-lg ${textColor} ${placeholderColor} focus:ring-2 ${focusRingColor} transition-all w-full`}
+    //     disabled={isLoading}
+    //   />
+    //   {errors.email && (
+    //     <p className="text-red-400 text-sm text-left">{errors.email.message}</p>
+    //   )}
+    //   <button
+    //     type="submit"
+    //     disabled={isLoading}
+    //     className={`${buttonBg} px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap w-full text-sm`}
+    //   >
+    //     {isLoading ? (
+    //       <>
+    //         <div className={`w-4 h-4 border-2 ${spinnerBorder} border-t-transparent rounded-full animate-spin mr-2`}></div>
+    //         Joining
+    //       </>
+    //     ) : (
+    //       <>
+    //         Join Waitlist
+    //         <ArrowRight className="w-4 h-4 ml-2" />
+    //       </>
+    //     )}
+    //   </button>
+    // </div>
+    <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto mb-6 w-full">
+  <input
+    {...register('email', {
+      required: 'Email is required',
+      pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: 'Invalid email address'
+      }
+    })}
+    type="email"
+    placeholder="Enter your email address"
+    className={`flex-1 px-4 py-3 bg-transparent border ${borderColor} rounded-lg ${textColor} ${placeholderColor} focus:ring-2 ${focusRingColor} transition-all`}
+    disabled={isLoading}
+  />
+  <button
+    type="submit"
+    disabled={isLoading}
+    className={`${buttonBg} px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap w-full sm:w-auto text-base`}
+  >
+    {isLoading ? (
+      <>
+        <div className={`w-4 h-4 border-2 ${spinnerBorder} border-t-transparent rounded-full animate-spin mr-2`}></div>
+        Joining...
+      </>
+    ) : (
+      <>
+        Join Waitlist
+        <ArrowRight className="w-5 h-5 ml-2" />
+      </>
+    )}
+  </button>
+</div>
+
   )
 
   const renderDesktopForm = () => (

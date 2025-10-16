@@ -1,10 +1,11 @@
 services:
-  # PostgreSQL Database (No change needed here)
+  # PostgreSQL Database (Corrected)
   - type: pserv
     name: waitlist-db
-    env: docker
-    dockerfilePath: ./Dockerfile.db
+    env: postgres # 👈 Use Render's managed Postgres environment
     plan: starter
+    postgres:
+      version: "15" # 👈 Specify a Postgres version
     envVars:
       - key: POSTGRES_DB
         value: waitlist

@@ -1,5 +1,5 @@
 services:
-  # PostgreSQL Database
+  # PostgreSQL Database (No change needed here)
   - type: pserv
     name: waitlist-db
     env: docker
@@ -17,9 +17,11 @@ services:
   - type: web
     name: waitlist-backend
     env: docker
-    dockerfilePath: ./backend/Dockerfile
     plan: starter
     healthCheckPath: /health
+    # 👇 ADD THIS LINE 👇
+    rootDir: ./backend
+    dockerfilePath: ./backend/Dockerfile
     envVars:
       - key: DATABASE_URL
         fromService:
@@ -39,13 +41,13 @@ services:
   - type: web
     name: waitlist-frontend
     env: docker
-    dockerfilePath: ./frontend/Dockerfile
     plan: starter
+    # 👇 ADD THIS LINE 👇
+    rootDir: ./frontend
+    dockerfilePath: ./frontend/Dockerfile
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        value: https://chapi-1.onrender.com
         fromService:
           type: web
           name: waitlist-backend
           envVarKey: RENDER_EXTERNAL_URL
-

@@ -2,16 +2,14 @@ services:
   # PostgreSQL Database (Corrected)
   - type: pserv
     name: waitlist-db
-    env: postgres # 👈 Use Render's managed Postgres environment
+    env: postgres
     plan: starter
+    databaseName: waitlist    # 👈 Move and rename POSTGRES_DB
+    user: waitlist_user       # 👈 Move and rename POSTGRES_USER
     postgres:
-      version: "15" # 👈 Specify a Postgres version
+      version: "15"
     envVars:
-      - key: POSTGRES_DB
-        value: waitlist
-      - key: POSTGRES_USER
-        value: waitlist_user
-      - key: POSTGRES_PASSWORD
+      - key: POSTGRES_PASSWORD  # 👈 Only the password (or other custom vars) stays here
         generateValue: true
 
   # FastAPI Backend

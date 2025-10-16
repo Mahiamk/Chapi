@@ -23,9 +23,7 @@ app = FastAPI(
 )
 
 origins = [
-    "http://localhost:3000",
-    "https://jg7c52wx-3000.asse.devtunnels.ms",
-    "https://chapi-xhjf.onrender.com",
+    "https://chapi-2.onrender.com",
 ]
 
 # CORS middleware

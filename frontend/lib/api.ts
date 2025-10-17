@@ -11,14 +11,6 @@ function normalizeBaseUrl(url?: string) {
 }
 
 const API_BASE_URL = normalizeBaseUrl(process.env.NEXT_PUBLIC_API_URL)
-if (typeof console !== 'undefined') {
-  // helpful in browser to verify configuration
-  console.log('API Base URL (raw):', process.env.NEXT_PUBLIC_API_URL)
-  console.log('API Base URL (normalized):', API_BASE_URL)
-  if (!API_BASE_URL && process.env.NODE_ENV === 'production') {
-    console.error('Missing NEXT_PUBLIC_API_URL in production build; API calls will go to the frontend origin and 404.')
-  }
-}
 
 
 const api = axios.create({

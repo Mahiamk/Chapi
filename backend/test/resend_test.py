@@ -11,7 +11,7 @@ headers = {
 
 email_data = {
     "from": "Waitlist <onboarding@resend.dev>",
-    "to": ["mahikomohammed@gmail.com"],
+    "to": ["real@gmail.com"],
     "subject": "Resend test email",
     "html": "<p>Hello! This is a test from Resend API.</p>"
 }
